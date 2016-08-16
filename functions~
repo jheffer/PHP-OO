@@ -1,0 +1,26 @@
+<?php
+
+/*
+HTLISTL: LIST .HTACCESS FILES
+returns array $htaccess, a list of paths to .htaccess files
+*/
+
+function htlist() {
+
+	// directory iterator for $cgi_path
+	$di = new RecursiveDirectoryIterator($cgi_path);
+	
+	// find every file
+	foreach(new RecursiveIteratorIterator($di) as $filename => $file){
+	
+		// if the file is named .htaccess
+		if($file->getFilename() == ".htaccess"){
+
+			// add .htaccess paths to array
+			$htaccess_arr[] = $filename;
+		}
+	}
+	
+	return $htaccess_arr;
+}
+?>
